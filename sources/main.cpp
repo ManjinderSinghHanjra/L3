@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include <GL/freeglut.h>
-
+#include "Text.h"
 
 #define WIDTH 700
 #define HEIGHT 400
@@ -28,7 +28,7 @@ void reshape(int w, int h);
 void idle();
 void keyboard(unsigned char key, int x, int y);
 void specialKeyboard(int key, int x, int y);
-void mouse(int x, int y, int a, int b);
+void mouse(int button, int state, int x, int y);
 void mouseMotion(int x, int y);
 
 /* Drawing functions declarations*/
@@ -52,7 +52,7 @@ int main(int argc, char** argv)
     glutIdleFunc(idle);
     glutKeyboardFunc(keyboard);
     glutSpecialFunc(specialKeyboard);
-    //glutMouseFunc(mouse);
+    glutMouseFunc(mouse);
     glutPassiveMotionFunc(mouseMotion);
     glutMainLoop();
 }
@@ -66,10 +66,12 @@ void display()
 
     showInformation();
 
-    displayTextNumbers(-90, -30, 0, mouseX);
-    displayTextNumbers(-90, -50, 0, mouseY);
-    displayTextNumbers(-90, -90, 0, keyboardKey);
-    displayText(-80, -70, 0, modifier);
+    displayTextAt(-130, 10, 0, "mouseButton: %s", mouseButtonPressed);
+    displayTextAt(-130, -10, 0, "mouseButtonState: %s", mouseState);
+    displayTextAt(-130, -30, 0, "mouseX: %d", mouseX);
+    displayTextAt(-130, -50, 0, "mouseY: %d", mouseY);
+    displayTextAt(-130, -70, 0, "keyboard key: %c", keyboardKey);
+    displayTextAt(-130, -90, 0, "modifier: %s", modifier);
 
     drawAxes();
 
@@ -119,10 +121,25 @@ void specialKeyboard(int key, int x, int y)
                                 break;
         case GLUT_ACTIVE_CTRL: modifier = "CTRL";
                                 break;
+        case GLUT_ACTIVE_ALT: modifier = "ALT";
+                                break;
     }
     glutPostRedisplay();
 }
 
+
+void mouse(int button, int state, int a, int b)
+{
+    if(button == GLUT_LEFT_BUTTON)
+        mouseButtonPressed = "Left";
+    else if(button == GLUT_RIGHT_BUTTON)
+        mouseButtonPressed = "Right";
+
+    if(state == GLUT_DOWN)
+        mouseState = "down";
+    else if(state == GLUT_UP)
+        mouseState = "up";
+}
 
 void mouseMotion(int x, int y)
 {
@@ -148,47 +165,25 @@ void drawAxes()
         glVertex3f(80.0, 60.0, 30.0);
     glEnd();
 
-    displayText(110, 60, 0, "X");
-    displayText(80, 90, 0, "Y");
-    displayText(80, 60, 90, "Z");
+    displayTextAt(110, 60, 0, "X");
+    displayTextAt(80, 90, 0, "Y");
+    displayTextAt(80, 60, 90, "Z");
 }
 
 
 void showInformation()
 {
     char *info = "Project L3";
-    displayText(-130, 80, 0, info);
+    displayTextAt(-130, 80, 0, info);
     info = "(Esc) to quit";
-    displayText(-130, 70, 0, info);
-    info = "keyPressed: ";
-    displayText(-130, -90, 0, info);
-    info = "specialKeyPressed: ";
-    displayText(-130, -70, 0, info);
-    info = "mouseX: ";
-    displayText(-130, -50, 0, info);
-    info = "mouseY: ";
-    displayText(-130, -30, 0, info);
+    displayTextAt(-130, 70, 0, info);
 }
 
 
-void displayText(int posx, int posy, int posz, char *text)
-{
-    glRasterPos3i(posx, posy, posz);
-    while(*text != '\0')
-    {
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *text);
-        text++;
-    }
-}
-
-void displayTextNumbers(int posx, int posy, int posz, int text)
-{
-    glRasterPos3i(posx, posy, posz);
-    glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, text);
-}
 
 /*
  *  To-do:
- *      1. Rewrite displayText() function to handle any type of data.
+ *      1. Rewrite displayText() function to handle any type of data.:: Done
  *      2. Add Perspective View
+ *      3.  w.r.t. Aspect Ratio
  */
