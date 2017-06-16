@@ -1,24 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string.h>
-
 #include <GL/freeglut.h>
-#include "Display.h"
-#include "CallbackFunctions.h"
+#include "Junction.h"
 
 #define WIDTH 700
 #define HEIGHT 400
 
 
-// Dimension factor for Orthographic View
-int dim = 100;
+/* Initialises the GLUT System, Creates a window, and Sets up the viewport */
+void initDisplay(int *argc, char **argv, int width, int height)
+{
+    glutInit(argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+    glutInitWindowSize(width, height);
+    glutCreateWindow("Project L3");
+    glViewport(0, 0, width, height);
+    //glutSwapBuffers();
+}
 
 
 
 int main(int argc, char** argv)
 {
-    setupGlutWindow(&argc, argv, WIDTH, HEIGHT);
+    setupGlobals();
+    initDisplay(&argc, argv, WIDTH, HEIGHT);
     setupCallbackFunctions();
     glutMainLoop();
 }
@@ -27,6 +30,5 @@ int main(int argc, char** argv)
 /*
  *  To-do:
  *      1. Rewrite displayText() function to handle any type of data.:: Done
- *      2. Add Perspective View
- *      3.  w.r.t. Aspect Ratio
+ *      2. Add Perspective View :: Done
  */
