@@ -16,11 +16,16 @@
 #define DEF_ASP 1
 #define DEF_DIM 100
 #define DEF_FOV 50
-#define DEF_THETA 340
+#define DEF_THETA 30
 #define DEF_PHI 60
 #define DEF_ECX 2
 #define DEF_ECY 2
 #define DEF_ECZ 2
+
+#define DEF_NEAR  (1 / 10)
+#define DEF_FAR  (1 * 10)
+
+
 
 /* Draw defaults */
 #define DEF_AXES 1

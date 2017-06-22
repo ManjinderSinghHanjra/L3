@@ -1,9 +1,7 @@
 #include "Junction.h"
 
 
-
-
-void setupCallbackFunctions()
+void initializeCallbackFunctions()
 {
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
@@ -13,7 +11,7 @@ void setupCallbackFunctions()
 }
 
 
-void setupGlobals()
+void initializeGlobals()
 {
     aspectRatio = DEF_ASP;
     dim = DEF_DIM;
@@ -24,10 +22,12 @@ void setupGlobals()
     ecy = DEF_ECY;
     ecz = DEF_ECZ;
 
+    nearPlane = DEF_NEAR;
+    farPlane = DEF_FAR;
+
     toggleAxes = DEF_AXES;
     toggleParameters = DEF_PARAMS;
     toggleProjection = DEF_PROJ;
 
     degreeRot = DEF_DEGREES;
-
 }

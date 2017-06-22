@@ -10,6 +10,9 @@ extern int ecx;
 extern int ecy;
 extern int ecz;
 
+extern float nearPlane;
+extern float farPlane;
+
 extern int toggleAxes;
 extern int toggleParameters;
 extern int toggleProjection;

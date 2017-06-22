@@ -3,6 +3,7 @@
 
 #include "Junction.h"
 
+extern int fov, dim;
 
 void keyboard(unsigned char key, int x, int y);     //whenever a keyboard key is pressed/interrupt occurs
 void specialKeyboard(int button, int x, int y);     //captures special keys like: SHIFT ALT CTRL F1.....

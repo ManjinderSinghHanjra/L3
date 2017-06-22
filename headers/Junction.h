@@ -1,5 +1,3 @@
-/* This is the common access point to other cpp sources. Any file can include this to access other files. But don't forget to include guards to avoid cyclic-dependency. */
-
 #ifndef JUNCTION_H
 #define JUNCTION_H
 
@@ -10,9 +8,12 @@
 #include "Display.h"
 #include "InputManager.h"
 #include "ErrorHandler.h"
+#include "Console.h"
+#include "Shapes.h"
+#include "Record.h"
 
-void setupGlobals();
-void setupCallbackFunctions();
+void initializeGlobals();
+void initializeCallbackFunctions();
 
 
 /* Display.h */

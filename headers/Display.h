@@ -3,13 +3,14 @@
 
 #include <Junction.h>
 
-void initDisplay(int *argc, char **argv, int width, int height);
 
 /* Display Interrupts callback functions */
 void display();                                     //called every single frame
 void reshape(int width, int height);                //called whenever the dimensions of the window are changed
 void idle();                                        //when there is no interaction with the window
 
-void camera();                                      //Camera/Eye
+
+void resetBuffers();
+void setCamera();                                      //Camera/Eye
 
 #endif // DISPLAY_H
