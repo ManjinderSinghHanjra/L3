@@ -3,18 +3,27 @@
 
 #include "Polygon.h"
 
+#undef print
+
 struct Record
 {
     char *name;
-    char *poly_type;
-    PolygonV3 *polygonV3;
-    PolygonV4 *polygonV4;
+    int poly_type;
+    union {
+        PolygonV3 *polygonV3;
+        PolygonV4 *polygonV4;
+    }Polygon;
     Record *next;
 
     //void (*add)(Record **head_ref, char *name, void *polygon);
     //void (*print)(Record **head_ref);
 };
 
+typedef struct Record Record;
+
 void add(Record **head_ref, char *type, char *name, void *polygon);
+
+void searchRecord(Record *record);
+
 void print(Record **head_ref);
 #endif // RECORD_H

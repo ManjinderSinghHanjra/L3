@@ -11,6 +11,7 @@
 #include "Console.h"
 #include "Shapes.h"
 #include "Record.h"
+#include "CommandProcessor.h"
 
 void initializeGlobals();
 void initializeCallbackFunctions();
