@@ -1,13 +1,3 @@
-#ifndef COMMANDPROCESSOR_H
-#define COMMANDPROCESSOR_H
-
-#include "Junction.h"
-
-extern Record *record;
-
-/* Command Processor */
-void commandProcess(char command[]);
-
 /*
  *  List of Commands that are available
  *
@@ -24,5 +14,32 @@ void commandProcess(char command[]);
  */
 
 
+
+#ifndef COMMANDPROCESSOR_H
+#define COMMANDPROCESSOR_H
+
+#include "Junction.h"
+
+extern Record *record;
+
+/* Command Processor */
+void commandProcess(char usersCommand[]);
+
+void fileProcess(const char *filename);
+
+
+extern char *set_of_commands[];
+
+void poly(char **args);
+
+void create(char **args);
+
+void transformation(char **args);
+
+void assemble(char **args);
+
+void extrude(char **args);
+
+extern void (*command[])(char **args);
 
 #endif // COMMANDPROCESSOR_H

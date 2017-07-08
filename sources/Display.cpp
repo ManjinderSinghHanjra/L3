@@ -2,6 +2,8 @@
 
 
 extern Record *record;
+extern char user_command[];
+
 
 void resetBuffers()
 {
@@ -69,7 +71,10 @@ void setCamera(void)
 
 void drawAllPolygons(Record *record)
 {
-
+    if(record == NULL)
+    {
+        printf("Error: drawAllPolygons(), record = NULL\n");
+    }
     while(record != NULL)
     {
         if((record)->poly_type == 3)

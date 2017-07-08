@@ -6,6 +6,10 @@
 #define DEF_WHITE 1.0, 1.0, 1.0
 #define DEF_BLACK 0.0, 0.0, 0.0
 
+/* For type Side 3 & Side 4*/
+#define V3 3
+#define V4 4
+
 
 /* Maths Macros */
 #define PI 3.1415926

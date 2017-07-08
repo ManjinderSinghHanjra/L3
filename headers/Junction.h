@@ -3,6 +3,7 @@
 
 #include <GL/freeglut.h>
 
+#include <stdlib.h>
 #include "Commons.h"
 #include "Globals.h"
 #include "Display.h"

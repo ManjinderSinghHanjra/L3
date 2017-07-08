@@ -21,9 +21,9 @@ struct Record
 
 typedef struct Record Record;
 
-void add(Record **head_ref, char *type, char *name, void *polygon);
+void add(Record **head_ref, Record *record);
 
-void searchRecord(Record *record);
+Record* searchRecord(Record **head_ref, char *name);
 
 void print(Record **head_ref);
 #endif // RECORD_H

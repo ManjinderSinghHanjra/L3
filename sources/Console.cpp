@@ -13,4 +13,7 @@ void showInfoOnConsole()
     fprintf(stdout, "Dimension of the Orthographic box: %i\n", dim );
     fprintf(stdout, "Field of View: %d\n", fov);
     fprintf(stdout, "(theta, phi) : (%d, %d)\n", theta, phi );
+
+    fprintf(stdout, "--------------------------------------------------------------------\n");
+    print(&record);
 }
