@@ -20,7 +20,7 @@
 
 #include "Junction.h"
 
-extern Record *record;
+extern Record *head_ref;
 
 /* Command Processor */
 void commandProcess(char usersCommand[]);

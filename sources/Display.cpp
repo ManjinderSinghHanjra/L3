@@ -1,7 +1,7 @@
 #include "Junction.h"
 
 
-extern Record *record;
+extern Record *head_ref;
 extern char user_command[];
 
 
@@ -22,7 +22,7 @@ void display()
     resetBuffers();
     setCamera();
 
-    drawAllPolygons(record);
+    drawAllPolygons(&head_ref);
 
     glFlush();
     glutSwapBuffers();
@@ -69,33 +69,36 @@ void setCamera(void)
 
 
 
-void drawAllPolygons(Record *record)
+void drawAllPolygons(Record **head_ref)
 {
-    if(record == NULL)
+    Record *temp = (*head_ref);
+    if((*head_ref) == NULL)
     {
         printf("Error: drawAllPolygons(), record = NULL\n");
+        return;
     }
-    while(record != NULL)
+    while((*head_ref) != NULL)
     {
-        if((record)->poly_type == 3)
+        if((*head_ref)->poly_type == 3)
         {
             glColor3f(0, 1, 0);
             glBegin(GL_TRIANGLES);
-            glVertex3i((record)->Polygon.polygonV3->x[0], (record)->Polygon.polygonV3->y[0], (record)->Polygon.polygonV3->z[0]);
-            glVertex3i((record)->Polygon.polygonV3->x[1], (record)->Polygon.polygonV3->y[1], (record)->Polygon.polygonV3->z[1]);
-            glVertex3i((record)->Polygon.polygonV3->x[2], (record)->Polygon.polygonV3->y[2], (record)->Polygon.polygonV3->z[2]);
+            glVertex3i((*head_ref)->Polygon.polygonV3->x[0], (*head_ref)->Polygon.polygonV3->y[0], (*head_ref)->Polygon.polygonV3->z[0]);
+            glVertex3i((*head_ref)->Polygon.polygonV3->x[1], (*head_ref)->Polygon.polygonV3->y[1], (*head_ref)->Polygon.polygonV3->z[1]);
+            glVertex3i((*head_ref)->Polygon.polygonV3->x[2], (*head_ref)->Polygon.polygonV3->y[2], (*head_ref)->Polygon.polygonV3->z[2]);
             glEnd();
         }
-        else if((record)->poly_type == 4)
+        else if((*head_ref)->poly_type == 4)
         {
             glColor3f(0, 1, 0);
             glBegin(GL_QUADS);
-            glVertex3i((record)->Polygon.polygonV3->x[0], (record)->Polygon.polygonV3->y[0], (record)->Polygon.polygonV3->z[0]);
-            glVertex3i((record)->Polygon.polygonV3->x[1], (record)->Polygon.polygonV3->y[1], (record)->Polygon.polygonV3->z[1]);
-            glVertex3i((record)->Polygon.polygonV3->x[2], (record)->Polygon.polygonV3->y[2], (record)->Polygon.polygonV3->z[2]);
-            glVertex3i((record)->Polygon.polygonV3->x[3], (record)->Polygon.polygonV3->y[3], (record)->Polygon.polygonV3->z[3]);
+            glVertex3i((*head_ref)->Polygon.polygonV3->x[0], (*head_ref)->Polygon.polygonV3->y[0], (*head_ref)->Polygon.polygonV3->z[0]);
+            glVertex3i((*head_ref)->Polygon.polygonV3->x[1], (*head_ref)->Polygon.polygonV3->y[1], (*head_ref)->Polygon.polygonV3->z[1]);
+            glVertex3i((*head_ref)->Polygon.polygonV3->x[2], (*head_ref)->Polygon.polygonV3->y[2], (*head_ref)->Polygon.polygonV3->z[2]);
+            glVertex3i((*head_ref)->Polygon.polygonV3->x[3], (*head_ref)->Polygon.polygonV3->y[3], (*head_ref)->Polygon.polygonV3->z[3]);
             glEnd();
         }
-        (record) = (record)->next;
+        (*head_ref) = (*head_ref)->next;
     }
+    (*head_ref) = temp;
 }

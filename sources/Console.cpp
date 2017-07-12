@@ -15,5 +15,5 @@ void showInfoOnConsole()
     fprintf(stdout, "(theta, phi) : (%d, %d)\n", theta, phi );
 
     fprintf(stdout, "--------------------------------------------------------------------\n");
-    print(&record);
+    print(&head_ref);
 }

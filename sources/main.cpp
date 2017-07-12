@@ -5,7 +5,7 @@
 #define HEIGHT 400
 
 /* Creating a Polygon List / a Polygon Record here */
-Record *record = NULL;
+Record *head_ref = NULL;
 
 /* Initialises the GLUT System, Creates a window, and Sets up the Viewport */
 void initializeDisplay(int *argc, char **argv, int width, int height)
@@ -32,7 +32,7 @@ int main(int argc, char** argv)
     fileProcess("C:\\Users\\sos\\Documents\\Code Blocks c++\\L6\\src\\polygon.txt");
 
     /* For debugging purpose */
-    print(&record);
+    print(&head_ref);
 
     getc(stdin);
 

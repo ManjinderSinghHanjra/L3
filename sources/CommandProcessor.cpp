@@ -52,7 +52,7 @@ void poly(char **tokens)
         temp_record->Polygon.polygonV3->z[1]= atoi(tokens[5+3]);
         temp_record->Polygon.polygonV3->z[2]= atoi(tokens[5+6]);
 
-        add(&record, temp_record);
+        add(&head_ref, temp_record);
     }
     else if(strcmp(tokens[1], "V4") == 0)
     {
@@ -76,15 +76,14 @@ void poly(char **tokens)
         temp_record->Polygon.polygonV4->z[2]= atoi(tokens[5+6]);
         temp_record->Polygon.polygonV4->z[3]= atoi(tokens[5+9]);
 
-        add(&record, temp_record);
+        add(&head_ref, temp_record);
     }
 }
 
 void create(char **tokens)
 {
 
-    Record *recordFound = (Record*)malloc(sizeof(Record));
-    recordFound = (Record*)searchRecord(&record, tokens[2]);
+    Record *recordFound = searchRecord(&head_ref, tokens[2]);
     if(recordFound == NULL)
     {
         printf("recordFound is found to be NULL\n");
@@ -118,22 +117,21 @@ void create(char **tokens)
         switch(tokens[i][0])
         {
         case 't':
-            printf("%c\n", tokens[i][0]);
             switch(tokens[i][1])
             {
             case 'X':
                 if(temp_record->poly_type = V3)
                 {
                     temp_record->Polygon.polygonV3->x[0] = recordFound->Polygon.polygonV3->x[0] + atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->x[1] = recordFound->Polygon.polygonV3->x[1] +atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->x[2] = recordFound->Polygon.polygonV3->x[2] +atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->x[1] = recordFound->Polygon.polygonV3->x[1] + atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->x[2] = recordFound->Polygon.polygonV3->x[2] + atoi(tokens[i+1]);
                 }
                 else
                 {
                     temp_record->Polygon.polygonV3->x[0] = recordFound->Polygon.polygonV3->x[0] + atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->x[1] = recordFound->Polygon.polygonV3->x[1] +atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->x[2] = recordFound->Polygon.polygonV3->x[2] +atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->x[3] = recordFound->Polygon.polygonV3->x[3] +atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->x[1] = recordFound->Polygon.polygonV3->x[1] + atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->x[2] = recordFound->Polygon.polygonV3->x[2] + atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->x[3] = recordFound->Polygon.polygonV3->x[3] + atoi(tokens[i+1]);
                 }
                 break;
 
@@ -141,15 +139,15 @@ void create(char **tokens)
                 if(temp_record->poly_type = V3)
                 {
                     temp_record->Polygon.polygonV3->y[0] = recordFound->Polygon.polygonV3->y[0] + atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->y[1] = recordFound->Polygon.polygonV3->y[1] +atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->y[2] = recordFound->Polygon.polygonV3->y[2] +atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->y[1] = recordFound->Polygon.polygonV3->y[1] + atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->y[2] = recordFound->Polygon.polygonV3->y[2] + atoi(tokens[i+1]);
                 }
                 else
                 {
                     temp_record->Polygon.polygonV3->y[0] = recordFound->Polygon.polygonV3->y[0] + atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->y[1] = recordFound->Polygon.polygonV3->y[1] +atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->y[2] = recordFound->Polygon.polygonV3->y[2] +atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->y[3] = recordFound->Polygon.polygonV3->y[3] +atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->y[1] = recordFound->Polygon.polygonV3->y[1] + atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->y[2] = recordFound->Polygon.polygonV3->y[2] + atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->y[3] = recordFound->Polygon.polygonV3->y[3] + atoi(tokens[i+1]);
                 }
                 break;
 
@@ -157,15 +155,15 @@ void create(char **tokens)
                 if(temp_record->poly_type = V3)
                 {
                     temp_record->Polygon.polygonV3->z[0] = recordFound->Polygon.polygonV3->z[0] + atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->z[1] = recordFound->Polygon.polygonV3->z[1] +atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->z[2] = recordFound->Polygon.polygonV3->z[2] +atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->z[1] = recordFound->Polygon.polygonV3->z[1] + atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->z[2] = recordFound->Polygon.polygonV3->z[2] + atoi(tokens[i+1]);
                 }
                 else
                 {
                     temp_record->Polygon.polygonV3->z[0] = recordFound->Polygon.polygonV3->z[0] + atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->z[1] = recordFound->Polygon.polygonV3->z[1] +atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->z[2] = recordFound->Polygon.polygonV3->z[2] +atoi(tokens[i+1]);
-                    temp_record->Polygon.polygonV3->z[3] = recordFound->Polygon.polygonV3->z[3] +atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->z[1] = recordFound->Polygon.polygonV3->z[1] + atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->z[2] = recordFound->Polygon.polygonV3->z[2] + atoi(tokens[i+1]);
+                    temp_record->Polygon.polygonV3->z[3] = recordFound->Polygon.polygonV3->z[3] + atoi(tokens[i+1]);
                 }
                 break;
             }
@@ -186,7 +184,7 @@ void create(char **tokens)
     }
 
     /* All editing to temp_record is done at this point. So, now we can add it to the Record List */
-    add(&record, temp_record);
+    add(&head_ref, temp_record);
 }
 
 void transformation(char **tokens)
@@ -290,7 +288,7 @@ void fileProcess(const char *filename)
             /* This is the end of the file, so now we know that the buffer[] now contains the last line and the next char on stream is EOF,
              * so now we can send this last line to the commandProcess() and break this loop
              */
-            printf("%s sent to commandprocessor\n", buffer);
+            printf("%s sent to command-processor\n", buffer);
             commandProcess(buffer);
             break;
         }
@@ -309,7 +307,7 @@ void fileProcess(const char *filename)
         length++;
         if(ch == '\n')
         {
-            printf("%s sent to commandprocessor.\n", buffer);
+            printf("%s sent to command-processor.\n", buffer);
             commandProcess(buffer);
             length = 0;
         }

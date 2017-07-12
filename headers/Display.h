@@ -13,8 +13,8 @@ void idle();                                        //when there is no interacti
 void resetBuffers();
 void setCamera();                                      //Camera/Eye
 
-void communicator(Record *r);
+void communicator(Record *head_ref);
 
-void drawAllPolygons(Record *record);
+void drawAllPolygons(Record **head_ref);
 
 #endif // DISPLAY_H

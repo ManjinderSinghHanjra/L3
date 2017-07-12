@@ -1,5 +1,5 @@
 #include "Record.h"
-#include <malloc.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -12,21 +12,20 @@ void add(Record **head_ref, Record *record)
 
 Record *searchRecord(Record **head_ref, char *name)
 {
-    if((*head_ref)==NULL)
-        printf("Error: record.cpp, searchRecord(), (*head_ref)=NULL already.\n");
-    else
-        printf("record.cpp, not null\n");
-    Record head = (**head_ref);
+    Record *temp = (*head_ref);
+
     while((*head_ref) != NULL)
     {
         if(strcmp((*head_ref)->name, name) == 0)
         {
-
-            return (*head_ref);
+            Record *another_temp = (*head_ref);
+            (*head_ref) = temp;
+            return (another_temp);
         }
         (*head_ref) = (*head_ref)->next;
     }
 
+    (*head_ref) = temp;
     return NULL;
 }
 
@@ -34,8 +33,7 @@ Record *searchRecord(Record **head_ref, char *name)
 // For Debug Purpose
 void print(Record **head_ref)
 {
-    if((*head_ref) == NULL)
-        printf("void print(): Record is NULL\n");
+    Record *temp = (*head_ref);
     while((*head_ref) != NULL)
     {
         printf("[Record] : \n");
@@ -46,4 +44,5 @@ void print(Record **head_ref)
         printf("[x3, y3, z3] : [%d, %d, %d]\n", (*head_ref)->Polygon.polygonV3->x[2], (*head_ref)->Polygon.polygonV3->y[2], (*head_ref)->Polygon.polygonV3->z[2]);
         (*head_ref) = (*head_ref)->next;
     }
+    (*head_ref) = temp;
 }
