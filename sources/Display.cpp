@@ -8,7 +8,7 @@ extern char user_command[];
 void resetBuffers()
 {
     // For Debugging Purpose
-    showInfoOnConsole();
+    //showInfoOnConsole();
 
     glClearColor(DEF_WHITE, 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

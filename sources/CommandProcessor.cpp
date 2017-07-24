@@ -11,6 +11,16 @@
 /* EOF is an integer. So don't mistake to compare it with some non-integer value otherwise results will be different. */
 
 
+void deepCopy(Record *r1, Record *r2)
+{
+    r1->name = r2->name;
+    r1->poly_type = r2->poly_type;
+    (r1->Polygon) = (r2->Polygon);
+    *(r1->Polygon.polygonV4) = *(r2->Polygon.polygonV4);
+}
+
+
+
 char *set_of_commands[] =
 {
     // Creates a polygon
@@ -38,12 +48,11 @@ void poly(char **tokens)
     {
         temp_record->Polygon.polygonV3 = (PolygonV3*)malloc(sizeof(PolygonV3));
 
-        temp_record->poly_type = V3;
+        temp_record->poly_type = V3;        //V3 is a macro :\ . Sorry.
         temp_record->name = tokens[2];
         temp_record->Polygon.polygonV3->x[0]= atoi(tokens[3]);
         temp_record->Polygon.polygonV3->x[1]= atoi(tokens[3+3]);
         temp_record->Polygon.polygonV3->x[2]= atoi(tokens[3+6]);
-
         temp_record->Polygon.polygonV3->y[0]= atoi(tokens[4]);
         temp_record->Polygon.polygonV3->y[1]= atoi(tokens[4+3]);
         temp_record->Polygon.polygonV3->y[2]= atoi(tokens[4+6]);
@@ -99,17 +108,8 @@ void create(char **tokens)
 
     Record *temp_record = (Record*)malloc(sizeof(Record));
 
-    memcpy(temp_record, recordFound, sizeof(Record));
+    deepCopy(temp_record, recordFound);
 
-    temp_record->Polygon.polygonV3 = (PolygonV3*)malloc(sizeof(PolygonV3));
-    temp_record->Polygon.polygonV4 = (PolygonV4*)malloc(sizeof(PolygonV4));
-
-    /*
-     * memcpy makes exact duplicates, bit by bit. I'm avoiding to allocate mem to Union Members of this structure due to the fact that
-     * memcpy does it bit by bit, which'll yield the same result. And, we'll get the same name as specified in the recordFound's polygon fields,
-     * Since we are creating a new object which will have different name than the polygon from which it gets its values,
-     * so now we can replace the name value that we got through memcpy() 'name specified on token[1]'
-     */
     temp_record->name = tokens[1];
 
     for(int i=3; tokens[i] != NULL; i++)
@@ -217,6 +217,7 @@ void commandProcess(char *usersCommand)
     if(usersCommand == NULL)
     {
         printf("Command Passed is NULL.\n Hence returning.\n");
+        printf("Line: %d", __LINE__);
         return;
     }
     char *delim = " \t\n\f";
@@ -278,7 +279,7 @@ void fileProcess(const char *filename)
         if( ch == EOF && length == 0)
         {
             /* This means the file is empty, so we cannot risk to send buffer to commandProcess(), otherwise some garbage value/ or something unknown
-             * will be received on dereferencing this buffer. This might further lead to Unknown Behavior as well
+             * will be received on dereferencing this buffer. UBehaviour
              */
              printf("File is empty. \n By-passing the file reading routine... \n");
              break;
@@ -298,7 +299,9 @@ void fileProcess(const char *filename)
             buffer = (char*)realloc(buffer, BUFFER_LENGTH);
             if(buffer == NULL)
             {
-                printf("Error: Could not reallocate memory[%d bytes] to the buffer string.\n", BUFFER_LENGTH);
+                printf("Error: Could not reallocate memory[%d bytes] to the buffer command string.\n", BUFFER_LENGTH);
+                printf("Line: %d", __LINE__);
+                fclose(file);
                 exit(EXIT_FAILURE);
             }
         }
